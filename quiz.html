@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>שאלון היכרות</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <audio id="background-music" src="music.mp3" loop autoplay muted></audio>
+    <video autoplay muted loop playsinline id="bg-video">
+    <source src="love.mp4" type="video/mp4" />
+    הדפדפן שלך לא תומך בניגון וידאו ברקע.
+</video>
+
+    
+    <div class="container" id="login-container">
+        <h2>כניסה לשאלון</h2>
+        <p>הכנס את מספר הטלפון שלך כדי להתחיל</p>
+        <input type="text" id="phoneInput"  >
+        <button onclick="checkAccess()">המשך</button>
+    </div>
+
+    <div class="container" id="quiz-container" style="display:none;">
+        <h1>  : בוא נראה אם תעמוד במשימה</h1>
+        <p>
+            ברוך הבא לשאלון ההיכרות <br>
+            🎯 ** סך הכל יש 22 שאלות, ובכל שאלה יש לבחור תשובה אחת בלבד ** <br>
+             💔 אבל אם תטעה יותר מדי... כנראה שזה פחות יעבוד בינינו <br>
+             😉 שיהיה בהצלחה 
+        </p>
+        <button id="start-btn" class="btn"> המשך </button>
+    </div>
+
+    <div id="question-container" style="display:none;"></div>
+    <button id="next-btn" class="btn" style="display:none;"> לשאלה הבאה</button>
+
+    <div id="done-message" style="display:none; text-align:center;">
+        <h2>כבר מילאת את השאלון. תודה!</h2>
+    </div>
+
+    <script>
+        const adminPhone = "0546842169"; // המספר שלך
+        function checkAccess() {
+            const phone = document.getElementById("phoneInput").value.trim();
+            const completedPhones = JSON.parse(localStorage.getItem("completedPhones") || "[]");
+
+            if (phone === adminPhone) {
+                // תמיד תוכל להיכנס
+                showQuiz();
+            } else if (completedPhones.includes(phone)) {
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("done-message").style.display = "block";
+            } else {
+                showQuiz();
+            }
+        }
+
+        function showQuiz() {
+            document.getElementById("login-container").style.display = "none";
+            document.getElementById("quiz-container").style.display = "block";
+        }
+
+        // בקרת סיום שאלון
+        function finishQuiz(phone) {
+            if (phone !== adminPhone) {
+                const completedPhones = JSON.parse(localStorage.getItem("completedPhones") || "[]");
+                if (!completedPhones.includes(phone)) {
+                    completedPhones.push(phone);
+                    localStorage.setItem("completedPhones", JSON.stringify(completedPhones));
+                }
+            }
+        }
+    </script>
+    <script src="script.js" defer></script>
+</body>

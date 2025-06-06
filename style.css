@@ -1,0 +1,339 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+/* כלל box-sizing לכל האלמנטים */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rubik', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #f2f2f2;
+    position: relative;
+    margin: 0;
+    overflow-x: hidden;
+    z-index: 0;
+    background-color: #0d0d0d;
+    background-image: radial-gradient(circle at center, rgba(255, 110, 199, 0.03) 0%, transparent 70%);
+}
+
+/* מסירים את הרקע התמונה הישנה */
+body::before {
+    content: none; /* מבטלים את ה background-image */
+}
+
+/* מוסיפים את הוידאו כרקע עם פילטרים */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1; /* מתחת לתוכן */
+    filter: brightness(0.6);
+    pointer-events: none;
+}
+
+.box-container {
+    max-width: 700px;
+    width: 90%;
+    margin: 20px auto;
+    padding: 30px;
+    border: 2px solid #ff6ec7;
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 20px rgba(255, 110, 199, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    direction: rtl;
+    text-align: right;
+    transition: box-shadow 0.3s ease;
+}
+
+.box-container:hover {
+    box-shadow: 0 0 30px rgba(255, 110, 199, 0.5);
+}
+
+.container {
+    text-align: center;
+    padding: 40px;
+    border: 2px solid #ff6ec7;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 30px rgba(255, 110, 199, 0.6);
+    max-width: 700px;
+    width: 90%;
+    margin: 0 auto;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #ff6ec7;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(255, 110, 199, 0.6);
+    font-weight: 700;
+    animation: fadeIn 1s ease-in-out;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    margin-bottom: 1.2em;
+    color: #eee;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.question {
+    white-space: nowrap;
+    display: inline-block;
+    padding: 10px 15px;
+    border: 2px solid #ff6ec7;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.05);
+    max-width: none; /* להסיר הגבלת רוחב */
+    overflow-x: auto; /* גלילה אופקית במקרה של טקסט ארוך */
+}
+
+
+.answer-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    padding: 5px 0;
+    margin-bottom: 5px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.answer-radio {
+    transform: scale(1.5);
+    margin-right: 5px;
+    cursor: pointer;
+    accent-color: #ff6ec7;
+}
+
+label {
+    font-size: 1.2em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #f2f2f2;
+}
+
+button {
+    padding: 12px 24px;
+    background-color: #ff6ec7;
+    border: none;
+    border-radius: 30px;
+    font-size: 1em;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 20, 147, 0.6);
+    user-select: none;
+}
+
+button:hover {
+    background-color: #ff1493;
+    box-shadow: 0 0 25px rgba(255, 20, 147, 1);
+    transform: scale(1.05);
+}
+
+#next-btn {
+    display: none;
+    margin-top: 20px;
+    width: 60%;
+    padding: 12px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    background-color: #ff6ec7;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center;
+}
+
+#next-btn:hover {
+    background-color: #ff1493;
+    box-shadow: 0 0 10px #ff1493;
+}
+
+
+/* Media Queries משופרות נשמרו כמות שהן */
+
+::selection {
+    background-color: #ff6ec7;
+    color: #fff;
+}
+
+a {
+    color: #ff6ec7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #ff1493;
+    text-decoration: underline;
+}
+
+#login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+#phoneInput {
+    font-size: 1.2em;
+    padding: 10px;
+    width: 250px;
+    max-width: 90%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 2px solid #ff6ec7;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+#login-container button {
+    font-size: 1.3em;
+    padding: 14px 30px;
+    margin-top: 10px;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(255, 110, 199, 0.6);
+}
+
+/* אנימציות */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(8px); }
+    75% { transform: translateX(-4px); }
+}
+
+@keyframes pulseHeart {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 5px #ff6ec7);
+    }
+    50% {
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 15px #ff1493);
+    }
+}
+
+/* אנימציה של לבבות צפים */
+@keyframes floatHearts {
+  0% { transform: translateY(0) rotate(0); opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Media Query למכשירים קטנים */
+@media (max-width: 400px) {
+    .container,
+    .box-container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    p,
+    label,
+    .question {
+        font-size: 1em;
+    }
+
+    button {
+        width: 100%;
+        font-size: 1em;
+        padding: 10px 0;
+    }
+
+    #phoneInput {
+        width: 100%;
+    }
+
+    #next-btn {
+        width: 100%;
+    }
+}
+#go-to-whatsapp {
+    display: block;         /* גורם לכפתור להיות בלוק */
+    margin: 20px auto;      /* שוליים אוטומטיים ימינה ושמאלה => מרכזים */
+    padding: 12px 30px;     /* פדינג נעימים */
+    font-size: 1.2em;       /* גודל פונטים מעט גדול יותר */
+    max-width: 200px;       /* אפשר להגביל רוחב */
+    border-radius: 30px;    /* עיגול פינות כדי להתאים לסגנון הקיים */
+    box-shadow: 0 0 15px rgba(255, 110, 199, 0.6); /* כמו בכפתורים אחרים */
+    cursor: pointer;
+    background-color: #ff6ec7; /* צבע ורוד תואם */
+    color: #fff;
+    border: none;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+#go-to-whatsapp:hover {
+    background-color: #ff1493;
+    box-shadow: 0 0 25px rgba(255, 20, 147, 1);
+    transform: scale(1.05);
+}
+
+
+.exit-btn {
+    background-color: #ff4d94; /* ורוד */
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.exit-btn:hover {
+    background-color: #e6397a;
+}
+
+.door-icon {
+    font-size: 1.5rem;
+}
+.exit-btn-container {
+    display: flex;
+    justify-content: center; /* מרכז אופקי */
+    align-items: center;     /* מרכז אנכי */
+    height: 200px;           /* גובה שמאפשר מיקום באמצע */
+}
